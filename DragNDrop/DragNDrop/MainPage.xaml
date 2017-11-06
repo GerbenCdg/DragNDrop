@@ -4,8 +4,9 @@
              xmlns:local="clr-namespace:DragNDrop"
              x:Class="DragNDrop.MainPage">
 
-	<Label Text="Welcome to Xamarin Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+    <AbsoluteLayout x:Name="al">
+        <BoxView x:Name="aquaBv" BackgroundColor="Aqua" />
+        <BoxView x:Name="aquaBv2" BackgroundColor="IndianRed" IsVisible="False"/>
+    </AbsoluteLayout>
 
 </ContentPage>
