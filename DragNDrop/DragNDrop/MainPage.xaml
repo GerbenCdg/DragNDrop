@@ -5,8 +5,17 @@
              x:Class="DragNDrop.MainPage">
 
     <AbsoluteLayout x:Name="al">
-        <BoxView x:Name="aquaBv" BackgroundColor="Aqua" />
-        <BoxView x:Name="aquaBv2" BackgroundColor="IndianRed" IsVisible="False"/>
+
+        <local:CardView x:Name="testCardView"/>
+        <local:CardView x:Name="testCardView2"/>
+        <local:CardView x:Name="testCardView3"/>
+        <local:CardView x:Name="testCardView4"/>
+        <local:CardView x:Name="testCardView5"/>
+        <local:CardView x:Name="testCardView6"/>
+        <local:CardView x:Name="testCardView7"/>
+        <local:CardView x:Name="testCardView8"/>
+        <local:CardView x:Name="testCardView9"/>
+
     </AbsoluteLayout>
 
 </ContentPage>
