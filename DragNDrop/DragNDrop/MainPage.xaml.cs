@@ -1,81 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace DragNDrop
 {
+
     public partial class MainPage : ContentPage
     {
-        Point lastPoint;
-        Point lastDrag;
-        Size rectSize = new Size(100, 100);
-        const int screenWidth = 340;
-        const int screenHeight = 540;
+        private static readonly int CardWidth = 200;
+        private static readonly int CardHeight = 180;
+        public static Size RectSize { get; } = new Size(200, 180);
 
-        const bool seeBug = false;
+        private DragNDropHandler DragDropHandler { get; }
 
         public MainPage()
         {
             InitializeComponent();
-
-            lastPoint = new Point(100, 100);
-            lastDrag = new Point(100, 100);
-            AbsoluteLayout.SetLayoutBounds(aquaBv, new Rectangle(lastPoint, rectSize));
-
-            var panGesture = new PanGestureRecognizer();
-            panGesture.PanUpdated += PanGesture_PanUpdated;
-            aquaBv.GestureRecognizers.Add(panGesture);
+            InitializeCardViews();
+            DragDropHandler = new DragNDropHandler(al);
+            SubscribeToDragNDropEvents();
         }
 
-
-        private void PanGesture_PanUpdated(object sender, PanUpdatedEventArgs e)
+        protected override void OnAppearing()
         {
-            switch (e.StatusType)
+            base.OnAppearing();
+            Application.Current.MainPage.SizeChanged += (s, e) =>
             {
-                case GestureStatus.Started:
-                    if (!seeBug)
-                    {
-                        aquaBv.IsVisible = false;
-                        aquaBv2.IsVisible = true;
-                    }
-                    break;
-
-                case GestureStatus.Running:
-                    // Translate and ensure we don't pan beyond the wrapped user interface element bounds.
-                    lastDrag.X =
-                        Math.Max(0, Math.Min(lastPoint.X + e.TotalX, screenWidth));
-                    lastDrag.Y =
-                        Math.Max(0, Math.Min(lastPoint.Y + e.TotalY, screenHeight));
-
-                    if (!seeBug)
-                    {
-                        AbsoluteLayout.SetLayoutBounds(aquaBv2, new Rectangle(lastDrag, rectSize));
-                    }
-                    else
-                    {
-                        AbsoluteLayout.SetLayoutBounds(aquaBv, new Rectangle(lastDrag, rectSize));
-                    }
-
-                    break;
-
-                case GestureStatus.Completed:
-                    // Store the translation applied during the pan
-                    lastPoint.X = lastDrag.X;
-                    lastPoint.Y = lastDrag.Y;
-
-                    if (!seeBug)
-                    {
-                        AbsoluteLayout.SetLayoutBounds(aquaBv, new Rectangle(lastDrag, rectSize));
-
-                        aquaBv2.IsVisible = false;
-                        aquaBv.IsVisible = true;
-                    }
-                    break;
-
-            }
+                DragDropHandler.AvailableWidth = Application.Current.MainPage.Width - CardWidth;
+                DragDropHandler.AvailableHeight = Application.Current.MainPage.Height - CardHeight;
+            };
         }
+
+        private void InitializeCardViews()
+        {
+
+            AbsoluteLayout.SetLayoutBounds(testCardView, new Rectangle(new Point(100, 100), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView2, new Rectangle(new Point(200, 100), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView3, new Rectangle(new Point(100, 200), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView4, new Rectangle(new Point(200, 200), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView5, new Rectangle(new Point(100, 300), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView6, new Rectangle(new Point(200, 300), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView7, new Rectangle(new Point(100, 400), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView8, new Rectangle(new Point(200, 400), RectSize));
+
+          //  GhostView gh = GhostFactory.YellowBorderGhostInstance(testCardView4);
+          //  al.Children.Add(gh);
+          //  AbsoluteLayout.SetLayoutBounds(gh, new Rectangle(new Point(100, 100), RectSize));
+
+        }
+
+        private void SubscribeToDragNDropEvents()
+        {
+            DragDropHandler.DragStarted += (s, e) =>
+            {
+                Log("Drag started !");
+            };
+
+            DragDropHandler.DragUpdated += (s, e) =>
+            {
+                Log($"Drag updated ! newX : {e.Position.X}, newY : {e.Position.Y}");
+            };
+
+            DragDropHandler.DragEnded += (s, e) =>
+            {
+                Log("Drag ended !");
+            };
+
+        }
+
+
+        public static void Log(String msg)
+        {
+            System.Diagnostics.Debug.WriteLine(msg);
+        }
+
     }
 }

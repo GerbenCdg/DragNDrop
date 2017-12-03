@@ -1,12 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:DragNDrop"
              x:Class="DragNDrop.MainPage">
 
     <AbsoluteLayout x:Name="al">
-        <BoxView x:Name="aquaBv" BackgroundColor="Aqua" />
-        <BoxView x:Name="aquaBv2" BackgroundColor="IndianRed" IsVisible="False"/>
+        
+        <local:CardView x:Name="testCardView"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
+        <local:CardView x:Name="testCardView2"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
+        <local:CardView x:Name="testCardView3"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
+        <local:CardView x:Name="testCardView4"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
+        <local:CardView x:Name="testCardView5"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
+        <local:CardView x:Name="testCardView6"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
+        <local:CardView x:Name="testCardView7"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
+        <local:CardView x:Name="testCardView8"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
+
     </AbsoluteLayout>
 
 </ContentPage>
