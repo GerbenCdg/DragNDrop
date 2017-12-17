@@ -62,10 +62,10 @@ namespace DragNDrop
                 _borderColor = value;
                 XamlBorder.BackgroundColor = _borderColor;
 
-                if (BlockView is CardView cardView)
+                if (BlockView is ContainerBlockView container)
                 {
-                    cardView.GetFrame().HasShadow = false;
-                    cardView.GetFrame().Margin = 7;
+                    container.GetFrame().HasShadow = false;
+                    container.GetFrame().Margin = 7;
                 }
             }
         }

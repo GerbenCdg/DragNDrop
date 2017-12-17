@@ -51,8 +51,14 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CardView.xaml.cs">
-      <DependentUpon>CardView.xaml</DependentUpon>
+    <Compile Include="ContainerBlockView.xaml.cs">
+      <DependentUpon>ContainerBlockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SimpleBlockView.xaml.cs">
+      <DependentUpon>SimpleBlockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextBlockView.xaml.cs">
+      <DependentUpon>TextBlockView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +86,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CardView.xaml">
+    <EmbeddedResource Include="ContainerBlockView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -93,6 +99,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GhostView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TextBlockView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SimpleBlockView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

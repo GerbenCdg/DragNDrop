@@ -6,15 +6,15 @@
              x:Class="DragNDrop.MainPage">
 
     <AbsoluteLayout x:Name="al">
-        
-        <local:CardView x:Name="testCardView"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
-        <local:CardView x:Name="testCardView2"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
-        <local:CardView x:Name="testCardView3"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
-        <local:CardView x:Name="testCardView4"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
-        <local:CardView x:Name="testCardView5"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
-        <local:CardView x:Name="testCardView6"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
-        <local:CardView x:Name="testCardView7"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
-        <local:CardView x:Name="testCardView8"> <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> </local:CardView>
+        <!-- <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> -->
+        <local:ContainerBlockView x:Name="testCardView"> </local:ContainerBlockView>
+        <local:ContainerBlockView x:Name="testCardView2"> </local:ContainerBlockView>
+        <local:ContainerBlockView x:Name="testCardView3"> </local:ContainerBlockView>
+        <local:ContainerBlockView x:Name="testCardView4"> </local:ContainerBlockView>
+        <local:ContainerBlockView x:Name="testCardView5"> </local:ContainerBlockView>
+        <local:ContainerBlockView x:Name="testCardView6"> </local:ContainerBlockView>
+        <local:ContainerBlockView x:Name="testCardView7"> </local:ContainerBlockView>
+        <local:ContainerBlockView x:Name="testCardView8"></local:ContainerBlockView>
 
     </AbsoluteLayout>
 

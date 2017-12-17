@@ -10,34 +10,29 @@ using Xamarin.Forms.Xaml;
 namespace DragNDrop
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CardView : BlockView
+    public partial class TextBlockView : SimpleBlockView
     {
-
         private string _labelText;
         public string LabelText
         {
             get => _labelText;
-            set { _labelText = value;
+            set
+            {
+                _labelText = value;
                 XamlLabel.Text = value;
             }
         }
 
-        public CardView(string labelText)
+        public TextBlockView(ContainerBlockView container, string labelText) : base(container)
         {
             InitializeComponent();
-
+            container.AddChild(this);
             LabelText = labelText;
         }
 
-        public Frame GetFrame()
-        {
-            return XamlFrame;
-        }
-
-
         public override BlockView GetCopy()
         {
-            return new CardView(LabelText);
+            return new TextBlockView(base.ParentContainer, LabelText);
         }
     }
 }
