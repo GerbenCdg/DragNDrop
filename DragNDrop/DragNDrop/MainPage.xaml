@@ -15,7 +15,13 @@
         <local:ContainerBlockView x:Name="testCardView6"> </local:ContainerBlockView>
         <local:ContainerBlockView x:Name="testCardView7"> </local:ContainerBlockView>
         <local:ContainerBlockView x:Name="testCardView8"></local:ContainerBlockView>
-
+        <local:TextBlockView x:Name="textBlockView1">
+            <x:Arguments>
+                <x:String>Si señor</x:String> </x:Arguments> </local:TextBlockView>
+        <local:TextBlockView x:Name="textBlockView2">
+            <x:Arguments> <x:String>Hola</x:String> </x:Arguments> </local:TextBlockView>
+        <local:TextBlockView x:Name="textBlockView3">
+            <x:Arguments> <x:String>Manzana</x:String> </x:Arguments> </local:TextBlockView>
     </AbsoluteLayout>
 
 </ContentPage>

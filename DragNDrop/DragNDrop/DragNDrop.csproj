@@ -38,7 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BlockView.xaml.cs">
+    <Compile Include="BlockViews\BlockView.xaml.cs">
       <DependentUpon>BlockView.xaml</DependentUpon>
     </Compile>
     <Compile Include="DragNDropEventArgs.cs" />
@@ -92,7 +92,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BlockView.xaml">
+    <EmbeddedResource Include="BlockViews\BlockView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

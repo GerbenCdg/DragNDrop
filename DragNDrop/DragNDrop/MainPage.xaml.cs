@@ -11,9 +11,7 @@ namespace DragNDrop
 {
     public partial class MainPage : ContentPage
     {
-        private static readonly int CardWidth = 200;
-        private static readonly int CardHeight = 180;
-        private static Size RectSize { get; } = new Size(200, 180);
+        private static Size RectSize { get; } = new Size(130, 90);
 
         private DragNDropHandler DragDropHandler { get; }
 
@@ -37,18 +35,21 @@ namespace DragNDrop
 
         private void InitializeCardViews()
         {
-            AbsoluteLayout.SetLayoutBounds(testCardView, new Rectangle(new Point(100, 100), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView, new Rectangle(new Point(50, 100), RectSize));
             AbsoluteLayout.SetLayoutBounds(testCardView2, new Rectangle(new Point(200, 100), RectSize));
-            AbsoluteLayout.SetLayoutBounds(testCardView3, new Rectangle(new Point(100, 200), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView3, new Rectangle(new Point(50, 200), RectSize));
             AbsoluteLayout.SetLayoutBounds(testCardView4, new Rectangle(new Point(200, 200), RectSize));
-            AbsoluteLayout.SetLayoutBounds(testCardView5, new Rectangle(new Point(100, 300), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView5, new Rectangle(new Point(50, 300), RectSize));
             AbsoluteLayout.SetLayoutBounds(testCardView6, new Rectangle(new Point(200, 300), RectSize));
-            AbsoluteLayout.SetLayoutBounds(testCardView7, new Rectangle(new Point(100, 400), RectSize));
+            AbsoluteLayout.SetLayoutBounds(testCardView7, new Rectangle(new Point(50, 400), RectSize));
             AbsoluteLayout.SetLayoutBounds(testCardView8, new Rectangle(new Point(200, 400), RectSize));
 
-            SimpleBlockView textBlockView1 = new TextBlockView(testCardView2, "Im a textBlockView !"); 
             AbsoluteLayout.SetLayoutBounds(textBlockView1, new Rectangle(new Point(150,100), new Size(150, 50)));
+            AbsoluteLayout.SetLayoutBounds(textBlockView2, new Rectangle(new Point(250, 100), new Size(150, 50)));
+            AbsoluteLayout.SetLayoutBounds(textBlockView3, new Rectangle(new Point(350, 100), new Size(150, 50)));
+
             // TODO in DragNDropHandler if user drags a SimpleBlockView, check if the copy(or original ?) is removed correctly after the drag 
+            // TODO keep the old dimensions of block before starting drag?
         }
 
         private void SubscribeToDragNDropEvents()
@@ -64,37 +65,42 @@ namespace DragNDrop
             {
                 Log("Drag ended !");
               
-                IList<BlockView> coveredBlockViews = getBlockViewsCoveredByDragged(e);
+                IList<ContainerBlockView> coveredBlockViews = getContainerBVsCoveredByDragged(e);
 
                 if (coveredBlockViews.Count != 0 && e.Block is SimpleBlockView)
                 {
-                    al.Children.Remove(e.Block);
-                    (coveredBlockViews[0] as ContainerBlockView).AddChild((SimpleBlockView) e.Block);
+                    SimpleBlockView sbv = (SimpleBlockView)e.Block;
+                    ContainerBlockView cbv = coveredBlockViews[0];
+
+                    sbv.RemoveFromParentContainerIfSet();
+                    cbv.AddChild(sbv);                    
                 }
             };
         }
 
-        private IList<BlockView> getBlockViewsCoveredByDragged(DragNDropEventArgs e)
+        private IList<ContainerBlockView> getContainerBVsCoveredByDragged(DragNDropEventArgs e)
         {
-            BlockView bv;
+            ContainerBlockView cbv;
             double eCenterX;
             double eCenterY;
 
-            IList<BlockView> covered = new List<BlockView>();
+            IList<ContainerBlockView> covered = new List<ContainerBlockView>();
 
             foreach (var child in al.Children)
             {
-                bv = child as BlockView;
-                if (!bv.Equals(e.Block))
+                if ((cbv = child as ContainerBlockView) == null)
+                    break;
+
+                if (!cbv.Equals(e.Block))
                 {
                     eCenterX = e.Position.X + e.Block.Width / 2;
                     eCenterY = e.Position.Y + e.Block.Height / 2;
 
-                    if (eCenterX > bv.X && eCenterX < bv.X + bv.Width
-                        && eCenterY > bv.Y && eCenterY < bv.Y + bv.Height)
+                    if (eCenterX > cbv.X && eCenterX < cbv.X + cbv.Width
+                        && eCenterY > cbv.Y && eCenterY < cbv.Y + cbv.Height)
                     {
                         // Center of e.Block is above bv.
-                        covered.Add(bv);
+                        covered.Add(cbv);
                     }
                 }
             }

@@ -20,6 +20,7 @@ namespace DragNDrop
         private double LastY { get; set; } = -1;
 
         private PanGestureRecognizer PanRecognizer { get; } = new PanGestureRecognizer();
+        private Point lastPoint { get; set; }
         private BlockView Dragged { get; set; }
         private BlockView DraggedCopy { get; set; }
 
@@ -78,7 +79,7 @@ namespace DragNDrop
                 case GestureStatus.Started:
                     Dragged = currentDrag;
                     StartPan();
-                    DragStarted?.Invoke(this, new DragNDropEventArgs(Dragged, new Point(Dragged.X, Dragged.Y)));
+                    DragStarted?.Invoke(this, new DragNDropEventArgs(Dragged, new Point(lastPoint.X, lastPoint.Y)));
                     break;
 
                 case GestureStatus.Running:
@@ -98,26 +99,27 @@ namespace DragNDrop
 
         private void StartPan()
         {
-            DraggedCopy = GhostFactory.YellowBorderGhostInstance(Dragged);
+            DraggedCopy = GhostFactory.BlueGhostInstance(Dragged);
             DraggedSize = new Size(Dragged.Width, Dragged.Height);
             AvailableWidth = AvailableMainPageWidth - Dragged.Width;
             AvailableHeight = AvailableMainPageHeight - Dragged.Height;
 
             AbsoluteLayout.Children.Add(DraggedCopy);
             Dragged.IsVisible = false;
-            
-           // Point lastPoint = new Point(Dragged.X, Dragged.Y);
-            Point lastPoint = GetScreenCoordinates(Dragged);
+
+            lastPoint = GetScreenCoordinates(Dragged);
+
             AbsoluteLayout.SetLayoutBounds(DraggedCopy, new Rectangle(lastPoint, DraggedSize));
+            MainPage.Log($"Real X : {Dragged.X}, Real Y : {Dragged.Y}");
         }
 
         private void RunPan(PanUpdatedEventArgs e)
         {
             // Translate and ensure we don't pan beyond the wrapped user interface element bounds.
             double x =
-                Math.Max(0, Math.Min(Dragged.X + e.TotalX, AvailableWidth));
+                Math.Max(0, Math.Min(lastPoint.X + e.TotalX, AvailableWidth));
             double y =
-                Math.Max(0, Math.Min(Dragged.Y + e.TotalY, AvailableHeight));
+                Math.Max(0, Math.Min(lastPoint.Y + e.TotalY, AvailableHeight));
 
             AbsoluteLayout.SetLayoutBounds(DraggedCopy, new Rectangle(new Point(x, y), DraggedSize));
         }
@@ -141,7 +143,13 @@ namespace DragNDrop
             if (bv is SimpleBlockView)
             {
                 SimpleBlockView sbv = (SimpleBlockView) bv;
-                return new Point(sbv.ParentContainer.X, sbv.ParentContainer.Y);
+                Point parentPoint = sbv.getParentPoint();
+
+                if (parentPoint.X != -1)
+                {
+                    MainPage.Log("ParentPointX:" + parentPoint.X + ", PArentPoint.Y : " + parentPoint.Y);
+                    return parentPoint;
+                }
             }
              //else,  it's a container
             

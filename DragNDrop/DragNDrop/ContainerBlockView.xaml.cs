@@ -13,8 +13,6 @@ namespace DragNDrop
     public partial class ContainerBlockView : BlockView
     {
 
-        private IList<BlockView> Children { get; } =  new List<BlockView>();
-    
         public ContainerBlockView()
         {
             InitializeComponent();
@@ -25,12 +23,20 @@ namespace DragNDrop
             return XamlFrame;
         }
 
-        public void AddChild(SimpleBlockView child)
+        public void AddChild(SimpleBlockView sbv)
         {
-            Children.Add(child);
-            Container.Children.Add(child);
+            xamlContainer.Children.Add(sbv);
+          /*  VerticalOptions = "Start"
+        HorizontalOptions = "FillAndExpand"*/
+            sbv.ParentContainer = this;
         }
 
+        public void RemoveChild(SimpleBlockView sbv)
+        {
+            xamlContainer.Children.Remove(sbv);
+            sbv.ParentContainer = null;
+         //   sbv.Parent = al;
+        }
 
         public override BlockView GetCopy()
         {

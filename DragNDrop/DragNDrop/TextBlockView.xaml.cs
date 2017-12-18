@@ -23,16 +23,15 @@ namespace DragNDrop
             }
         }
 
-        public TextBlockView(ContainerBlockView container, string labelText) : base(container)
+        public TextBlockView(string labelText)
         {
             InitializeComponent();
-            container.AddChild(this);
             LabelText = labelText;
         }
 
         public override BlockView GetCopy()
         {
-            return new TextBlockView(base.ParentContainer, LabelText);
+            return new TextBlockView(LabelText);
         }
     }
 }

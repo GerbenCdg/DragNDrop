@@ -8,7 +8,7 @@
     <Frame x:Name="XamlFrame" IsClippedToBounds="True" HasShadow="True" BackgroundColor="White"
            OutlineColor="Gray" Padding="5">
         
-        <StackLayout x:Name="Container" Orientation="Horizontal" >
+        <StackLayout x:Name="xamlContainer" Orientation="Horizontal">
         </StackLayout>
 
     </Frame>

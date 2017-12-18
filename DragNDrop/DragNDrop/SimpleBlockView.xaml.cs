@@ -12,12 +12,23 @@ namespace DragNDrop
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SimpleBlockView : BlockView
     {
-        public ContainerBlockView ParentContainer { get; }
+        public ContainerBlockView ParentContainer { private get; set; }
 
-        public SimpleBlockView(ContainerBlockView parent)
+        public SimpleBlockView()
         {
             InitializeComponent();
-            ParentContainer = parent;
+        }
+
+        public void RemoveFromParentContainerIfSet()
+        {
+            ParentContainer?.RemoveChild(this);
+        }
+
+        public Point getParentPoint()
+        {
+            if (ParentContainer == null)
+                return new Point(-1,-1);
+            else return new Point(ParentContainer.X, ParentContainer.Y);
         }
 
     }
