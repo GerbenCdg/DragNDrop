@@ -10,11 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace DragNDrop
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class GhostView : BlockView
+    public partial class GhostView : BlockViews.BlockView
     {
-        private BlockView _blockview;
+        private BlockViews.BlockView _blockview;
 
-        public BlockView BlockView
+        public BlockViews.BlockView BlockView
         {
             get => _blockview;
             private set
@@ -62,7 +62,7 @@ namespace DragNDrop
                 _borderColor = value;
                 XamlBorder.BackgroundColor = _borderColor;
 
-                if (BlockView is ContainerBlockView container)
+                if (BlockView is BlockViews.ContainerBlockView container)
                 {
                     container.GetFrame().HasShadow = false;
                     container.GetFrame().Margin = 7;
@@ -97,7 +97,7 @@ namespace DragNDrop
             }
         }
 
-        public GhostView(BlockView b)
+        public GhostView(BlockViews.BlockView b)
         {
             InitializeComponent();
 

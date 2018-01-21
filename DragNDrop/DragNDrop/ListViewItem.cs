@@ -8,7 +8,7 @@ namespace DragNDrop
 {
     class ListViewItem
     {
-        public BlockView BlockView { get; set; }
+        public BlockViews.BlockView BlockView { get; set; }
         public string Name { get; set; }
     }
 }

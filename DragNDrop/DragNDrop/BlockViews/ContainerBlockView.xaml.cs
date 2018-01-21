@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DragNDrop
+namespace DragNDrop.BlockViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ContainerBlockView : BlockView
+    public partial class ContainerBlockView : BlockViews.BlockView
     {
 
         public ContainerBlockView()
@@ -38,7 +32,7 @@ namespace DragNDrop
          //   sbv.Parent = al;
         }
 
-        public override BlockView GetCopy()
+        public override BlockViews.BlockView GetCopy()
         {
             return new ContainerBlockView();
         }

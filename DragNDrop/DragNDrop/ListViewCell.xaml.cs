@@ -27,11 +27,11 @@ namespace DragNDrop
         }
 
         public static readonly BindableProperty BlockViewProperty =
-            BindableProperty.Create("BlockView", typeof(BlockView), typeof(ListViewCell));
+            BindableProperty.Create("BlockView", typeof(BlockViews.BlockView), typeof(ListViewCell));
 
-        public BlockView BlockView
+        public BlockViews.BlockView BlockView
         {
-            get => (BlockView)GetValue(BlockViewProperty);
+            get => (BlockViews.BlockView)GetValue(BlockViewProperty);
             set => SetValue(BlockViewProperty, value);
         }
     }

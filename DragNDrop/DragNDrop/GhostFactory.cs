@@ -9,7 +9,7 @@ namespace DragNDrop
 {
     static class GhostFactory
     {
-        public static GhostView BlueGhostInstance(BlockView bv)
+        public static GhostView BlueGhostInstance(BlockViews.BlockView bv)
         {
             return new GhostView(bv)
             {
@@ -18,7 +18,7 @@ namespace DragNDrop
             };
         }
 
-        public static GhostView YellowBorderGhostInstance(BlockView bv)
+        public static GhostView YellowBorderGhostInstance(BlockViews.BlockView bv)
         {
             return new GhostView(bv)
             {
@@ -26,7 +26,7 @@ namespace DragNDrop
             };
         }
 
-        public static GhostView RedGhostInstance(BlockView bv)
+        public static GhostView RedGhostInstance(BlockViews.BlockView bv)
         {
             return new GhostView(bv)
             {

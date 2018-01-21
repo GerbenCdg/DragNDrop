@@ -3,6 +3,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:DragNDrop"
+             xmlns:blockViews="clr-namespace:DragNDrop.BlockViews;assembly=DragNDrop"
+             xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              x:Class="DragNDrop.MainPage">
     
 
@@ -16,21 +18,25 @@
                        BackgroundColor="GreenYellow">
             
             <!-- <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> -->
-            <local:ContainerBlockView x:Name="testCardView"> </local:ContainerBlockView>
-            <local:ContainerBlockView x:Name="testCardView2"> </local:ContainerBlockView>
-            <local:ContainerBlockView x:Name="testCardView3"> </local:ContainerBlockView>
-            <local:ContainerBlockView x:Name="testCardView4"> </local:ContainerBlockView>
-            <local:ContainerBlockView x:Name="testCardView5"> </local:ContainerBlockView>
-            <local:ContainerBlockView x:Name="testCardView6"> </local:ContainerBlockView>
-            <local:ContainerBlockView x:Name="testCardView7"> </local:ContainerBlockView>
-            <local:ContainerBlockView x:Name="testCardView8"></local:ContainerBlockView>
-            <local:TextBlockView x:Name="textBlockView1">
+            <blockViews:ContainerBlockView x:Name="testCardView"> </blockViews:ContainerBlockView>
+            <blockViews:ContainerBlockView x:Name="testCardView2"> </blockViews:ContainerBlockView>
+            <blockViews:ContainerBlockView x:Name="testCardView3"> </blockViews:ContainerBlockView>
+            <blockViews:ContainerBlockView x:Name="testCardView4"> </blockViews:ContainerBlockView>
+            <blockViews:ContainerBlockView x:Name="testCardView5"> </blockViews:ContainerBlockView>
+            <blockViews:ContainerBlockView x:Name="testCardView6"> </blockViews:ContainerBlockView>
+            <blockViews:ContainerBlockView x:Name="testCardView7"> </blockViews:ContainerBlockView>
+            <blockViews:ContainerBlockView x:Name="testCardView8"></blockViews:ContainerBlockView>
+            <!--<forms:SvgCachedImage x:Name="Img" WidthRequest="200" HeightRequest="200" Source="Resources/corner-up-left.svg"/>
+
+            <blockViews:ImageBlockView x:Name="textBlockView1">
                 <x:Arguments>
-                    <x:String>Si señor</x:String> </x:Arguments> </local:TextBlockView>
-            <local:TextBlockView x:Name="textBlockView2">
-                <x:Arguments> <x:String>Hola</x:String> </x:Arguments> </local:TextBlockView>
-            <local:TextBlockView x:Name="textBlockView3">
-                <x:Arguments> <x:String>Manzana</x:String> </x:Arguments> </local:TextBlockView>
+                    <x:String>"Resources/corner-up-left.svg"</x:String> </x:Arguments>
+            </blockViews:ImageBlockView>-->
+            
+            <blockViews:TextBlockView x:Name="textBlockView2">
+                <x:Arguments> <x:String>Hola</x:String> </x:Arguments> </blockViews:TextBlockView>
+            <blockViews:TextBlockView x:Name="textBlockView3">
+                <x:Arguments> <x:String>Manzana</x:String> </x:Arguments> </blockViews:TextBlockView>
         </AbsoluteLayout>
 
         <AbsoluteLayout x:Name="al_lv"

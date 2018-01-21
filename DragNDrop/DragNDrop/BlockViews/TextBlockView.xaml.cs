@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Xamarin.Forms.Xaml;
 
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace DragNDrop
+namespace DragNDrop.BlockViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TextBlockView : SimpleBlockView
+    public partial class TextBlockView : BlockViews.SimpleBlockView
     {
         private string _labelText;
         public string LabelText
@@ -29,7 +22,7 @@ namespace DragNDrop
             LabelText = labelText;
         }
 
-        public override BlockView GetCopy()
+        public override BlockViews.BlockView GetCopy()
         {
             return new TextBlockView(LabelText);
         }

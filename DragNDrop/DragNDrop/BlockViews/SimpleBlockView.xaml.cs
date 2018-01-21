@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DragNDrop
+namespace DragNDrop.BlockViews
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SimpleBlockView : BlockView
+    public partial class SimpleBlockView : BlockViews.BlockView
     {
-        public ContainerBlockView ParentContainer { private get; set; }
+        public BlockViews.ContainerBlockView ParentContainer { private get; set; }
 
         public SimpleBlockView()
         {

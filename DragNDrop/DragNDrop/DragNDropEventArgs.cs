@@ -9,10 +9,10 @@ namespace DragNDrop
 {
     class DragNDropEventArgs : EventArgs
     {
-        public BlockView Block { get; }
+        public BlockViews.BlockView Block { get; }
         public Point Position { get; }
 
-        public DragNDropEventArgs(BlockView block, Point position)
+        public DragNDropEventArgs(BlockViews.BlockView block, Point position)
         {
             Block = block;
             Position = position;

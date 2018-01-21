@@ -27,7 +27,7 @@ namespace DragNDrop
 
             al.ChildAdded += (s, e) =>
             {
-                DragDropHandler.AddRecognizerOnChild((BlockView)e.Element);
+                DragDropHandler.AddRecognizerOnChild((BlockViews.BlockView)e.Element);
             };
         }
 
@@ -56,7 +56,9 @@ namespace DragNDrop
             AbsoluteLayout.SetLayoutBounds(testCardView7, new Rectangle(new Point(50, 400), RectSize));
             AbsoluteLayout.SetLayoutBounds(testCardView8, new Rectangle(new Point(200, 400), RectSize));
 
-            AbsoluteLayout.SetLayoutBounds(textBlockView1, new Rectangle(new Point(150, 100), new Size(150, 50)));
+       //     AbsoluteLayout.SetLayoutBounds(Img, new Rectangle(new Point(300, 600), RectSize));
+
+        //    AbsoluteLayout.SetLayoutBounds(textBlockView1, new Rectangle(new Point(150, 100), new Size(150, 50)));
             AbsoluteLayout.SetLayoutBounds(textBlockView2, new Rectangle(new Point(250, 100), new Size(150, 50)));
             AbsoluteLayout.SetLayoutBounds(textBlockView3, new Rectangle(new Point(350, 100), new Size(150, 50)));
 
@@ -68,37 +70,37 @@ namespace DragNDrop
         {
             List<ListViewItem> blockViewList = new List<ListViewItem>
             {
-                new ListViewItem(){Name = "Boucle POUR", BlockView = new TextBlockView("Boucle POUR \n Boucle POUR \n Boucle POUR")},
-                new ListViewItem(){Name = "Boucle TANT QUE", BlockView = new TextBlockView("Boucle TANT QUE \n Boucle TANT QUE \n Boucle TANT QUE")},
-                new ListViewItem(){Name = "Condition SI", BlockView = new TextBlockView("Condition SI \n Condition SI \n Condition SI \n")},
-                new ListViewItem(){Name = "Tourner à droite", BlockView = new TextBlockView("Tourner à droite \n Tourner à droite \n Tourner à droite")},
-                new ListViewItem(){Name = "Tourner à gauche", BlockView = new TextBlockView("Tourner à gauche \n Tourner à gauche \n Tourner à gauche")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")}
+                new ListViewItem(){Name = "Boucle POUR", BlockView = new BlockViews.TextBlockView("Boucle POUR \n Boucle POUR \n Boucle POUR")},
+                new ListViewItem(){Name = "Boucle TANT QUE", BlockView = new BlockViews.TextBlockView("Boucle TANT QUE \n Boucle TANT QUE \n Boucle TANT QUE")},
+                new ListViewItem(){Name = "Condition SI", BlockView = new BlockViews.TextBlockView("Condition SI \n Condition SI \n Condition SI \n")},
+                new ListViewItem(){Name = "Tourner à droite", BlockView = new BlockViews.TextBlockView("Tourner à droite \n Tourner à droite \n Tourner à droite")},
+                new ListViewItem(){Name = "Tourner à gauche", BlockView = new BlockViews.TextBlockView("Tourner à gauche \n Tourner à gauche \n Tourner à gauche")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")}
             };
 
             ListView.ItemsSource = blockViewList;
@@ -108,7 +110,7 @@ namespace DragNDrop
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             Log("Item tapped !");
-            BlockView copy = ((ListViewItem)e.Item).BlockView.GetCopy();
+            BlockViews.BlockView copy = ((ListViewItem)e.Item).BlockView.GetCopy();
             al.Children.Add(copy);
             // TODO adapt coords and size (phone or tablet) 
             AbsoluteLayout.SetLayoutBounds(copy, new Rectangle(new Point(200, 200), RectSize));
@@ -128,12 +130,12 @@ namespace DragNDrop
             {
                 Log("Drag ended !");
 
-                IList<ContainerBlockView> coveredBlockViews = GetContainerBVsCoveredByDragged(e);
+                IList<BlockViews.ContainerBlockView> coveredBlockViews = GetContainerBVsCoveredByDragged(e);
 
-                if (coveredBlockViews.Count != 0 && e.Block is SimpleBlockView)
+                if (coveredBlockViews.Count != 0 && e.Block is BlockViews.SimpleBlockView)
                 {
-                    SimpleBlockView sbv = (SimpleBlockView)e.Block;
-                    ContainerBlockView cbv = coveredBlockViews[0];
+                    BlockViews.SimpleBlockView sbv = (BlockViews.SimpleBlockView)e.Block;
+                    BlockViews.ContainerBlockView cbv = coveredBlockViews[0];
 
                     sbv.RemoveFromParentContainerIfSet();
                     cbv.AddChild(sbv);
@@ -142,17 +144,17 @@ namespace DragNDrop
         }
 
         
-        private IList<ContainerBlockView> GetContainerBVsCoveredByDragged(DragNDropEventArgs e)
+        private IList<BlockViews.ContainerBlockView> GetContainerBVsCoveredByDragged(DragNDropEventArgs e)
         {
-            ContainerBlockView cbv;
+            BlockViews.ContainerBlockView cbv;
             double eCenterX;
             double eCenterY;
 
-            IList<ContainerBlockView> covered = new List<ContainerBlockView>();
+            IList<BlockViews.ContainerBlockView> covered = new List<BlockViews.ContainerBlockView>();
 
             foreach (var child in al.Children)
             {
-                if ((cbv = child as ContainerBlockView) == null)
+                if ((cbv = child as BlockViews.ContainerBlockView) == null)
                     break;
 
                 if (!cbv.Equals(e.Block))

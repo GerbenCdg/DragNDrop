@@ -22,8 +22,8 @@ namespace DragNDrop
 
         private PanGestureRecognizer PanRecognizer { get; } = new PanGestureRecognizer();
         private Point lastPoint { get; set; }
-        private BlockView Dragged { get; set; }
-        private BlockView DraggedCopy { get; set; }
+        private BlockViews.BlockView Dragged { get; set; }
+        private BlockViews.BlockView DraggedCopy { get; set; }
 
         public EventHandler<DragNDropEventArgs> DragStarted;
         public EventHandler<DragNDropEventArgs> DragUpdated;
@@ -48,7 +48,7 @@ namespace DragNDrop
             {
                 foreach (var view in AbsoluteLayout.Children)
                 {
-                    ((ContentView)view).Content.GestureRecognizers.Add(PanRecognizer);
+                    if (view is BlockViews.BlockView bv) bv.Content.GestureRecognizers.Add(PanRecognizer);
                 }
             }
             else // lv_al
@@ -81,7 +81,7 @@ namespace DragNDrop
 
         private void PanGesture_PanUpdated(object sender, PanUpdatedEventArgs e)
         {
-            BlockView currentDrag = ((Frame)sender).Parent as BlockView;
+            BlockViews.BlockView currentDrag = ((Frame)sender).Parent as BlockViews.BlockView;
 
             if (Dragged != currentDrag && DraggedCopy != null)
                 return;
@@ -152,12 +152,12 @@ namespace DragNDrop
         }
 
 
-        private Point GetScreenCoordinates(BlockView bv)
+        private Point GetScreenCoordinates(BlockViews.BlockView bv)
         {
 
-            if (bv is SimpleBlockView)
+            if (bv is BlockViews.SimpleBlockView)
             {
-                SimpleBlockView sbv = (SimpleBlockView)bv;
+                BlockViews.SimpleBlockView sbv = (BlockViews.SimpleBlockView)bv;
                 Point parentPoint = sbv.GetParentPoint();
 
                 if (parentPoint.X != -1)
@@ -171,7 +171,7 @@ namespace DragNDrop
             return new Point(bv.X, bv.Y);
         }
 
-        public void AddRecognizerOnChild(BlockView bv)
+        public void AddRecognizerOnChild(BlockViews.BlockView bv)
         {
             if (! bv.Content.GestureRecognizers.Any())
                 bv.Content.GestureRecognizers.Add(PanRecognizer);
