@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DragNDrop.BlockViews;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -62,7 +63,7 @@ namespace DragNDrop
                 _borderColor = value;
                 XamlBorder.BackgroundColor = _borderColor;
 
-                if (BlockView is BlockViews.ContainerBlockView container)
+                if (BlockView is ContainerBlockView container)
                 {
                     container.GetFrame().HasShadow = false;
                     container.GetFrame().Margin = 7;

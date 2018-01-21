@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using DragNDrop.BlockViews;
+using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,7 +14,7 @@ namespace DragNDrop
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        private static Size RectSize { get; } = new Size(130, 90);
+        private static Size RectSize { get; } = new Size(208, 144);
 
         private DragNDropHandler DragDropHandler { get; }
 
@@ -47,23 +49,26 @@ namespace DragNDrop
 
         private void InitializeCardViews()
         {
-            AbsoluteLayout.SetLayoutBounds(testCardView, new Rectangle(new Point(50, 100), RectSize));
-            AbsoluteLayout.SetLayoutBounds(testCardView2, new Rectangle(new Point(200, 100), RectSize));
-            AbsoluteLayout.SetLayoutBounds(testCardView3, new Rectangle(new Point(50, 200), RectSize));
-            AbsoluteLayout.SetLayoutBounds(testCardView4, new Rectangle(new Point(200, 200), RectSize));
-            AbsoluteLayout.SetLayoutBounds(testCardView5, new Rectangle(new Point(50, 300), RectSize));
-            AbsoluteLayout.SetLayoutBounds(testCardView6, new Rectangle(new Point(200, 300), RectSize));
-            AbsoluteLayout.SetLayoutBounds(testCardView7, new Rectangle(new Point(50, 400), RectSize));
-            AbsoluteLayout.SetLayoutBounds(testCardView8, new Rectangle(new Point(200, 400), RectSize));
+          //  AbsoluteLayout.SetLayoutBounds(testCardView, new Rectangle(new Point(50, 100), RectSize));
+          //  AbsoluteLayout.SetLayoutBounds(testCardView2, new Rectangle(new Point(200, 100), RectSize));
+          //  AbsoluteLayout.SetLayoutBounds(testCardView3, new Rectangle(new Point(50, 200), RectSize));
+          //  AbsoluteLayout.SetLayoutBounds(testCardView4, new Rectangle(new Point(200, 200), RectSize));
+          //  AbsoluteLayout.SetLayoutBounds(testCardView5, new Rectangle(new Point(50, 300), RectSize));
+          //  AbsoluteLayout.SetLayoutBounds(testCardView6, new Rectangle(new Point(200, 300), RectSize));
+          //  AbsoluteLayout.SetLayoutBounds(testCardView7, new Rectangle(new Point(50, 400), RectSize));
+          //  AbsoluteLayout.SetLayoutBounds(testCardView8, new Rectangle(new Point(200, 400), RectSize
 
-       //     AbsoluteLayout.SetLayoutBounds(Img, new Rectangle(new Point(300, 600), RectSize));
+          //  AbsoluteLayout.SetLayoutBounds(textBlockView1, new Rectangle(new Point(250, 100), new Size(150, 50)));
+          //  AbsoluteLayout.SetLayoutBounds(textBlockView2, new Rectangle(new Point(350, 100), new Size(150, 50)));
 
-        //    AbsoluteLayout.SetLayoutBounds(textBlockView1, new Rectangle(new Point(150, 100), new Size(150, 50)));
-            AbsoluteLayout.SetLayoutBounds(textBlockView2, new Rectangle(new Point(250, 100), new Size(150, 50)));
-            AbsoluteLayout.SetLayoutBounds(textBlockView3, new Rectangle(new Point(350, 100), new Size(150, 50)));
+          //  ImageSource imageSrc = ImageSource.FromResource("DragNDrop.Resources.turn-left.png");
+          //  BlockView imageBlockView = new ImageBlockView(imageSrc);
+          //  al.Children.Add(imageBlockView);
+          //  AbsoluteLayout.SetLayoutBounds(imageBlockView, new Rectangle(new Point(450, 600), RectSize));
+          // I
 
-            // TODO in DragNDropHandler if user drags a SimpleBlockView, check if the copy(or original ?) is removed correctly after the drag 
-            // TODO keep the old dimensions of block before starting drag?
+          //  TODO in DragNDropHandler if user drags a SimpleBlockView, check if the copy(or original ?) is removed correctly after the drag 
+          //  TODO keep the old dimensions of block before starting drag?
         }
 
         private void InitializeListView()
@@ -73,13 +78,8 @@ namespace DragNDrop
                 new ListViewItem(){Name = "Boucle POUR", BlockView = new BlockViews.TextBlockView("Boucle POUR \n Boucle POUR \n Boucle POUR")},
                 new ListViewItem(){Name = "Boucle TANT QUE", BlockView = new BlockViews.TextBlockView("Boucle TANT QUE \n Boucle TANT QUE \n Boucle TANT QUE")},
                 new ListViewItem(){Name = "Condition SI", BlockView = new BlockViews.TextBlockView("Condition SI \n Condition SI \n Condition SI \n")},
-                new ListViewItem(){Name = "Tourner à droite", BlockView = new BlockViews.TextBlockView("Tourner à droite \n Tourner à droite \n Tourner à droite")},
-                new ListViewItem(){Name = "Tourner à gauche", BlockView = new BlockViews.TextBlockView("Tourner à gauche \n Tourner à gauche \n Tourner à gauche")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
-                new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Tourner à droite", BlockView = new ImageBlockView(ImageSource.FromResource("DragNDrop.Resources.turn-right.png"))},
+                new ListViewItem(){Name = "Tourner à gauche", BlockView = new ImageBlockView(ImageSource.FromResource("DragNDrop.Resources.turn-left.png"))},
                 new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
                 new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
                 new ListViewItem(){Name = "Boucle FOR", BlockView = new BlockViews.TextBlockView("Boucle for")},
@@ -105,6 +105,8 @@ namespace DragNDrop
 
             ListView.ItemsSource = blockViewList;
             ListView.ItemTapped += ListView_ItemTapped;
+            ListView.ItemSelected += (s, e) => ListView.SelectedItem = null;
+
         }
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)

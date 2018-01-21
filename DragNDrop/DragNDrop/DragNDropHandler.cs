@@ -42,45 +42,47 @@ namespace DragNDrop
         {
             PanRecognizer.PanUpdated += PanGesture_PanUpdated;
 
-
-            // al
-            if (AbsoluteLayout.Children[0] is ContentView)
+            if (AbsoluteLayout.Children.Any())
             {
-                foreach (var view in AbsoluteLayout.Children)
+                if (AbsoluteLayout.Children[0] is ContentView)
                 {
-                    if (view is BlockViews.BlockView bv) bv.Content.GestureRecognizers.Add(PanRecognizer);
+                    foreach (var view in AbsoluteLayout.Children)
+                    {
+                        if (view is BlockViews.BlockView bv) bv.Content.GestureRecognizers.Add(PanRecognizer);
+                    }
+                }
+                else // lv_al
+                {
+                    ListView lv = (ListView)AbsoluteLayout.Children[0];
+                    foreach (ListViewItem listViewItem in lv.ItemsSource)
+                    {
+                        listViewItem.BlockView.Content.GestureRecognizers.Add(PanRecognizer);
+                    }
                 }
             }
-            else // lv_al
-            {
-                ListView lv = (ListView)AbsoluteLayout.Children[0];
-                foreach (ListViewItem listViewItem in lv.ItemsSource)
-                {
-                    listViewItem.BlockView.Content.GestureRecognizers.Add(PanRecognizer);
-                }
-            }
-
 
             Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
-            {
-                if (DraggedCopy != null)
                 {
-                    if (DraggedCopy.X == LastX && DraggedCopy.Y == LastY)
+                    if (DraggedCopy != null)
                     {
-                        CompletePan();
+                        if (DraggedCopy.X == LastX && DraggedCopy.Y == LastY)
+                        {
+                            CompletePan();
+                        }
+                        else
+                        {
+                            LastX = DraggedCopy.X;
+                            LastY = DraggedCopy.Y;
+                        }
                     }
-                    else
-                    {
-                        LastX = DraggedCopy.X;
-                        LastY = DraggedCopy.Y;
-                    }
-                }
-                return true; // repeat the timer
-            });
+                    return true; // repeat the timer
+                });
         }
 
         private void PanGesture_PanUpdated(object sender, PanUpdatedEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("PanUpdated!");
+
             BlockViews.BlockView currentDrag = ((Frame)sender).Parent as BlockViews.BlockView;
 
             if (Dragged != currentDrag && DraggedCopy != null)
@@ -173,7 +175,7 @@ namespace DragNDrop
 
         public void AddRecognizerOnChild(BlockViews.BlockView bv)
         {
-            if (! bv.Content.GestureRecognizers.Any())
+            if (!bv.Content.GestureRecognizers.Any())
                 bv.Content.GestureRecognizers.Add(PanRecognizer);
         }
 

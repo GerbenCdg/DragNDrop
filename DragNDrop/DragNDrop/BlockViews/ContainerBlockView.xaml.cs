@@ -19,7 +19,7 @@ namespace DragNDrop.BlockViews
 
         public void AddChild(SimpleBlockView sbv)
         {
-            xamlContainer.Children.Add(sbv);
+            XamlContainer.Children.Add(sbv);
           /*  VerticalOptions = "Start"
         HorizontalOptions = "FillAndExpand"*/
             sbv.ParentContainer = this;
@@ -27,7 +27,7 @@ namespace DragNDrop.BlockViews
 
         public void RemoveChild(SimpleBlockView sbv)
         {
-            xamlContainer.Children.Remove(sbv);
+            XamlContainer.Children.Remove(sbv);
             sbv.ParentContainer = null;
          //   sbv.Parent = al;
         }

@@ -12,21 +12,23 @@ namespace DragNDrop.BlockViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ImageBlockView : SimpleBlockView
     {
-        public ImageBlockView(string source)
+        public ImageBlockView(ImageSource source)
         {
             InitializeComponent();
             ImageSource = source;
         }
 
+        private ImageSource _imageSource;
 
-        public static readonly BindableProperty ImageSourceProperty =
-            BindableProperty.Create("ImageSource", typeof(string), typeof(ImageBlockView), "");
-
-        public string ImageSource
+        public ImageSource ImageSource
         {
-            get => (string)GetValue(ImageSourceProperty);
-            set => SetValue(ImageSourceProperty, value);
-        }
+            get => _imageSource;
+            private set
+            {
+                _imageSource = value;
+                XamlImage.Source = value;
+            }
+        }    
 
         public override BlockView GetCopy()
         {
