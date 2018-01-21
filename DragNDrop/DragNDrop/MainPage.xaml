@@ -4,24 +4,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:DragNDrop"
              x:Class="DragNDrop.MainPage">
+    
 
-    <AbsoluteLayout x:Name="al">
-        <!-- <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> -->
-        <local:ContainerBlockView x:Name="testCardView"> </local:ContainerBlockView>
-        <local:ContainerBlockView x:Name="testCardView2"> </local:ContainerBlockView>
-        <local:ContainerBlockView x:Name="testCardView3"> </local:ContainerBlockView>
-        <local:ContainerBlockView x:Name="testCardView4"> </local:ContainerBlockView>
-        <local:ContainerBlockView x:Name="testCardView5"> </local:ContainerBlockView>
-        <local:ContainerBlockView x:Name="testCardView6"> </local:ContainerBlockView>
-        <local:ContainerBlockView x:Name="testCardView7"> </local:ContainerBlockView>
-        <local:ContainerBlockView x:Name="testCardView8"></local:ContainerBlockView>
-        <local:TextBlockView x:Name="textBlockView1">
-            <x:Arguments>
-                <x:String>Si señor</x:String> </x:Arguments> </local:TextBlockView>
-        <local:TextBlockView x:Name="textBlockView2">
-            <x:Arguments> <x:String>Hola</x:String> </x:Arguments> </local:TextBlockView>
-        <local:TextBlockView x:Name="textBlockView3">
-            <x:Arguments> <x:String>Manzana</x:String> </x:Arguments> </local:TextBlockView>
-    </AbsoluteLayout>
+    <RelativeLayout BackgroundColor="Wheat">
+
+
+        <AbsoluteLayout x:Name="al"
+                       RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.8 }"
+                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.2}"
+                       RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}" 
+                       BackgroundColor="GreenYellow">
+            
+            <!-- <x:Arguments> <x:String>Hello :)</x:String> </x:Arguments> -->
+            <local:ContainerBlockView x:Name="testCardView"> </local:ContainerBlockView>
+            <local:ContainerBlockView x:Name="testCardView2"> </local:ContainerBlockView>
+            <local:ContainerBlockView x:Name="testCardView3"> </local:ContainerBlockView>
+            <local:ContainerBlockView x:Name="testCardView4"> </local:ContainerBlockView>
+            <local:ContainerBlockView x:Name="testCardView5"> </local:ContainerBlockView>
+            <local:ContainerBlockView x:Name="testCardView6"> </local:ContainerBlockView>
+            <local:ContainerBlockView x:Name="testCardView7"> </local:ContainerBlockView>
+            <local:ContainerBlockView x:Name="testCardView8"></local:ContainerBlockView>
+            <local:TextBlockView x:Name="textBlockView1">
+                <x:Arguments>
+                    <x:String>Si señor</x:String> </x:Arguments> </local:TextBlockView>
+            <local:TextBlockView x:Name="textBlockView2">
+                <x:Arguments> <x:String>Hola</x:String> </x:Arguments> </local:TextBlockView>
+            <local:TextBlockView x:Name="textBlockView3">
+                <x:Arguments> <x:String>Manzana</x:String> </x:Arguments> </local:TextBlockView>
+        </AbsoluteLayout>
+
+        <AbsoluteLayout x:Name="al_lv"
+                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1 }"
+                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}" 
+                        BackgroundColor="Transparent">
+
+            <ListView x:Name="ListView" AbsoluteLayout.LayoutBounds="0, 0, .2, 1" AbsoluteLayout.LayoutFlags="SizeProportional"
+                      RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.2 }"
+                      BackgroundColor="Aqua"
+                      RowHeight="150">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <local:ListViewCell/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+        </AbsoluteLayout>
+
+    </RelativeLayout>
 
 </ContentPage>

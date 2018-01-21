@@ -24,7 +24,7 @@ namespace DragNDrop
             ParentContainer?.RemoveChild(this);
         }
 
-        public Point getParentPoint()
+        public Point GetParentPoint()
         {
             if (ParentContainer == null)
                 return new Point(-1,-1);

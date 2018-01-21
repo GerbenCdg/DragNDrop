@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dragNDrop="clr-namespace:DragNDrop;assembly=DragNDrop"
+             x:Class="DragNDrop.ListViewCell">
+
+    <ViewCell.View>
+        <StackLayout>
+          <ContentView Content="{Binding BlockView}" Padding="8,8,8,8"></ContentView>
+            <Label Text="{Binding Name}" Parent="8,8,4,4" HorizontalTextAlignment="Center"/>
+      </StackLayout>
+  </ViewCell.View>
+</ViewCell>

@@ -11,6 +11,7 @@ namespace DragNDrop
     {
         public double AvailableMainPageWidth { private get; set; } = 340;
         public double AvailableMainPageHeight { private get; set; } = 540;
+        public double OffSetX = 0;
 
         // these Width and Height take in account the size of the dragged BlockView.
         private double AvailableWidth { get; set; }
@@ -41,10 +42,24 @@ namespace DragNDrop
         {
             PanRecognizer.PanUpdated += PanGesture_PanUpdated;
 
-            foreach (var view in AbsoluteLayout.Children)
+
+            // al
+            if (AbsoluteLayout.Children[0] is ContentView)
             {
-                ((ContentView)view).Content.GestureRecognizers.Add(PanRecognizer);
+                foreach (var view in AbsoluteLayout.Children)
+                {
+                    ((ContentView)view).Content.GestureRecognizers.Add(PanRecognizer);
+                }
             }
+            else // lv_al
+            {
+                ListView lv = (ListView)AbsoluteLayout.Children[0];
+                foreach (ListViewItem listViewItem in lv.ItemsSource)
+                {
+                    listViewItem.BlockView.Content.GestureRecognizers.Add(PanRecognizer);
+                }
+            }
+
 
             Device.StartTimer(TimeSpan.FromMilliseconds(150), () =>
             {
@@ -79,17 +94,17 @@ namespace DragNDrop
                 case GestureStatus.Started:
                     Dragged = currentDrag;
                     StartPan();
-                    DragStarted?.Invoke(this, new DragNDropEventArgs(Dragged, new Point(lastPoint.X, lastPoint.Y)));
+                    DragStarted?.Invoke(this, new DragNDropEventArgs(Dragged, new Point(Math.Max(0, lastPoint.X - OffSetX), lastPoint.Y)));
                     break;
 
                 case GestureStatus.Running:
                     RunPan(e);
-                    DragUpdated?.Invoke(this, new DragNDropEventArgs(Dragged, new Point(DraggedCopy.X, DraggedCopy.Y)));
+                    DragUpdated?.Invoke(this, new DragNDropEventArgs(Dragged, new Point(Math.Max(0, DraggedCopy.X - OffSetX), DraggedCopy.Y)));
                     break;
 
                 case GestureStatus.Completed:
                     CompletePan();
-                    DragEnded.Invoke(this, new DragNDropEventArgs(Dragged, new Point(Dragged.X, Dragged.Y)));
+                    DragEnded.Invoke(this, new DragNDropEventArgs(Dragged, new Point(Math.Max(0, Dragged.X - OffSetX), Dragged.Y)));
                     break;
 
                 case GestureStatus.Canceled:
@@ -142,8 +157,8 @@ namespace DragNDrop
 
             if (bv is SimpleBlockView)
             {
-                SimpleBlockView sbv = (SimpleBlockView) bv;
-                Point parentPoint = sbv.getParentPoint();
+                SimpleBlockView sbv = (SimpleBlockView)bv;
+                Point parentPoint = sbv.GetParentPoint();
 
                 if (parentPoint.X != -1)
                 {
@@ -151,45 +166,51 @@ namespace DragNDrop
                     return parentPoint;
                 }
             }
-             //else,  it's a container
-            
-            return new Point(bv.X,bv.Y);
+            //else,  it's a container
+
+            return new Point(bv.X, bv.Y);
         }
 
-     /*   private Point GetScreenCoordinates(VisualElement view)
+        public void AddRecognizerOnChild(BlockView bv)
         {
-            // A view's default X- and Y-coordinates are LOCAL with respect to the boundaries of its parent,
-            // and NOT with respect to the screen. This method calculates the SCREEN coordinates of a view.
-            // The coordinates returned refer to the top left corner of the view.
+            if (! bv.Content.GestureRecognizers.Any())
+                bv.Content.GestureRecognizers.Add(PanRecognizer);
+        }
 
-            // Initialize with the view's "local" coordinates with respect to its parent
-            double screenCoordinateX = view.X;
-            double screenCoordinateY = view.Y;
+        /*   private Point GetScreenCoordinates(VisualElement view)
+           {
+               // A view's default X- and Y-coordinates are LOCAL with respect to the boundaries of its parent,
+               // and NOT with respect to the screen. This method calculates the SCREEN coordinates of a view.
+               // The coordinates returned refer to the top left corner of the view.
 
-            // Get the view's parent (if it has one...)
-            if (view.Parent.GetType() != typeof(App))
-            {
-                VisualElement parent = (VisualElement)view.Parent;
+               // Initialize with the view's "local" coordinates with respect to its parent
+               double screenCoordinateX = view.X;
+               double screenCoordinateY = view.Y;
+
+               // Get the view's parent (if it has one...)
+               if (view.Parent.GetType() != typeof(App))
+               {
+                   VisualElement parent = (VisualElement)view.Parent;
 
 
-                // Loop through all parents
-                while (parent != null)
-                {
-                    // Add in the coordinates of the parent with respect to ITS parent
-                    screenCoordinateX += parent.X;
-                    screenCoordinateY += parent.Y;
+                   // Loop through all parents
+                   while (parent != null)
+                   {
+                       // Add in the coordinates of the parent with respect to ITS parent
+                       screenCoordinateX += parent.X;
+                       screenCoordinateY += parent.Y;
 
-                    // If the parent of this parent isn't the app itself, get the parent's parent.
-                    if (parent.Parent.GetType() == typeof(App))
-                        parent = null;
-                    else
-                        parent = (VisualElement)parent.Parent;
-                }
-            }
+                       // If the parent of this parent isn't the app itself, get the parent's parent.
+                       if (parent.Parent.GetType() == typeof(App))
+                           parent = null;
+                       else
+                           parent = (VisualElement)parent.Parent;
+                   }
+               }
 
-            // Return the final coordinates...which are the global SCREEN coordinates of the view
-            return new Point(screenCoordinateX, screenCoordinateY);
-        }*/
+               // Return the final coordinates...which are the global SCREEN coordinates of the view
+               return new Point(screenCoordinateX, screenCoordinateY);
+           }*/
 
     }
 }

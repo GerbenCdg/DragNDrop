@@ -9,26 +9,38 @@ using Xamarin.Forms.Xaml;
 
 namespace DragNDrop
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
         private static Size RectSize { get; } = new Size(130, 90);
 
         private DragNDropHandler DragDropHandler { get; }
 
+
         public MainPage()
         {
             InitializeComponent();
             InitializeCardViews();
+            InitializeListView();
             DragDropHandler = new DragNDropHandler(al);
             SubscribeToDragNDropEvents();
+
+            al.ChildAdded += (s, e) =>
+            {
+                DragDropHandler.AddRecognizerOnChild((BlockView)e.Element);
+            };
         }
+
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             Application.Current.MainPage.SizeChanged += (s, e) =>
             {
-                DragDropHandler.AvailableMainPageWidth = Application.Current.MainPage.Width;
+                // TODO minus width of listView ! (check if tablet or phone)
+                double offsetX = Application.Current.MainPage.Width * 0.2;
+
+                DragDropHandler.AvailableMainPageWidth = Application.Current.MainPage.Width - offsetX;
                 DragDropHandler.AvailableMainPageHeight = Application.Current.MainPage.Height;
             };
         }
@@ -44,7 +56,7 @@ namespace DragNDrop
             AbsoluteLayout.SetLayoutBounds(testCardView7, new Rectangle(new Point(50, 400), RectSize));
             AbsoluteLayout.SetLayoutBounds(testCardView8, new Rectangle(new Point(200, 400), RectSize));
 
-            AbsoluteLayout.SetLayoutBounds(textBlockView1, new Rectangle(new Point(150,100), new Size(150, 50)));
+            AbsoluteLayout.SetLayoutBounds(textBlockView1, new Rectangle(new Point(150, 100), new Size(150, 50)));
             AbsoluteLayout.SetLayoutBounds(textBlockView2, new Rectangle(new Point(250, 100), new Size(150, 50)));
             AbsoluteLayout.SetLayoutBounds(textBlockView3, new Rectangle(new Point(350, 100), new Size(150, 50)));
 
@@ -52,8 +64,59 @@ namespace DragNDrop
             // TODO keep the old dimensions of block before starting drag?
         }
 
+        private void InitializeListView()
+        {
+            List<ListViewItem> blockViewList = new List<ListViewItem>
+            {
+                new ListViewItem(){Name = "Boucle POUR", BlockView = new TextBlockView("Boucle POUR \n Boucle POUR \n Boucle POUR")},
+                new ListViewItem(){Name = "Boucle TANT QUE", BlockView = new TextBlockView("Boucle TANT QUE \n Boucle TANT QUE \n Boucle TANT QUE")},
+                new ListViewItem(){Name = "Condition SI", BlockView = new TextBlockView("Condition SI \n Condition SI \n Condition SI \n")},
+                new ListViewItem(){Name = "Tourner à droite", BlockView = new TextBlockView("Tourner à droite \n Tourner à droite \n Tourner à droite")},
+                new ListViewItem(){Name = "Tourner à gauche", BlockView = new TextBlockView("Tourner à gauche \n Tourner à gauche \n Tourner à gauche")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")},
+                new ListViewItem(){Name = "Boucle FOR", BlockView = new TextBlockView("Boucle for")}
+            };
+
+            ListView.ItemsSource = blockViewList;
+            ListView.ItemTapped += ListView_ItemTapped;
+        }
+
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Log("Item tapped !");
+            BlockView copy = ((ListViewItem)e.Item).BlockView.GetCopy();
+            al.Children.Add(copy);
+            // TODO adapt coords and size (phone or tablet) 
+            AbsoluteLayout.SetLayoutBounds(copy, new Rectangle(new Point(200, 200), RectSize));
+        }
+
         private void SubscribeToDragNDropEvents()
         {
+           
             DragDropHandler.DragStarted += (s, e) => { Log("Drag started !"); };
 
             DragDropHandler.DragUpdated += (s, e) =>
@@ -64,8 +127,8 @@ namespace DragNDrop
             DragDropHandler.DragEnded += (s, e) =>
             {
                 Log("Drag ended !");
-              
-                IList<ContainerBlockView> coveredBlockViews = getContainerBVsCoveredByDragged(e);
+
+                IList<ContainerBlockView> coveredBlockViews = GetContainerBVsCoveredByDragged(e);
 
                 if (coveredBlockViews.Count != 0 && e.Block is SimpleBlockView)
                 {
@@ -73,12 +136,13 @@ namespace DragNDrop
                     ContainerBlockView cbv = coveredBlockViews[0];
 
                     sbv.RemoveFromParentContainerIfSet();
-                    cbv.AddChild(sbv);                    
+                    cbv.AddChild(sbv);
                 }
             };
         }
 
-        private IList<ContainerBlockView> getContainerBVsCoveredByDragged(DragNDropEventArgs e)
+        
+        private IList<ContainerBlockView> GetContainerBVsCoveredByDragged(DragNDropEventArgs e)
         {
             ContainerBlockView cbv;
             double eCenterX;
@@ -111,5 +175,7 @@ namespace DragNDrop
         {
             System.Diagnostics.Debug.WriteLine(msg);
         }
+
+
     }
 }
